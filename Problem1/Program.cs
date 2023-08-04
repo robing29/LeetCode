@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Data;
+using System.Collections;
+using System.Numerics;
 
 namespace Problem1
 {
@@ -15,26 +17,21 @@ namespace Problem1
 
         public static int[] TwoSum(int[] nums, int target)
         {
-            List<int> result = nums.ToList();
+            Dictionary<int, int> keyValuePairs = new Dictionary<int, int>();
             int[] ints = new int[2];
-            foreach (int item in result)
+            for (int i = 0; i < nums.Length; i++)
             {
-                ints[0] = item;
-                if (result.Where(x => x + item == target && x != item).ToList().Count() > 0)
+                if (keyValuePairs.ContainsKey(target - nums[i]))
                 {
-                    ints[1] = result.Where(x => x + item == target && x != item).First();
+                    ints[0] = keyValuePairs[(target-nums[i])];
+                    ints[1] = i;
                     break;
+                    
+                } else
+                {
+                    if (keyValuePairs.ContainsKey(nums[i]) == false) keyValuePairs.Add(nums[i], i);
                 }
-
             }
-            if (ints[1] + ints[0] != target)
-            {
-                ints[1] = (target / 2);
-                ints[0] = (target / 2);
-            }
-            ints[0] = nums.ToList().IndexOf(ints[0]);
-            ints[1] = nums.ToList().LastIndexOf(ints[1]);
-
             return ints;
         }
     }
