@@ -8,20 +8,23 @@
         }
         public int MaxProfit(int[] prices)
         {
+
+            int l = 0;
+            int r = 1;
             int maxProfit = 0;
-            for (int i = 0; i < prices.Length; i++)
+            while(r < prices.Length)
             {
-                for (int j = i+1; j < prices.Length; j++)
+                if (prices[l] < prices[r])
                 {
-                    int temp = prices[j] - prices[i]; //Szenario für einen Verkauf an dem Tag
-                    maxProfit = temp > maxProfit ? temp : maxProfit; //Tag an dem man verkauft - Tag an dem man verkauft
+                    maxProfit = Math.Max(prices[r] - prices[l], maxProfit);
+                    r++;
+                } else
+                {
+                    l = r;
+                    r = l + 1;
                 }
             }
             return maxProfit;
-
-
-            //Sicherstellen, dass Profit wirklich positiv ist
-            //Buy before sell
 
         }
     }
