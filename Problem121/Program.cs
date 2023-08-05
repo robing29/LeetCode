@@ -12,13 +12,14 @@
             int l = 0;
             int r = 1;
             int maxProfit = 0;
-            while(r < prices.Length)
+            while (r < prices.Length)
             {
                 if (prices[l] < prices[r])
                 {
                     maxProfit = Math.Max(prices[r] - prices[l], maxProfit);
                     r++;
-                } else
+                }
+                else
                 {
                     l = r;
                     r = l + 1;
